@@ -325,8 +325,8 @@
     let path = getRealPath()
     new Valine({
       el: "#vcomments",
-      appId: "Hyq9wkH495DgNHWhDQCOfQSp-gzGzoHsz",
-      appKey: "WaR7nrzhliHj9aVwdQzkdlGd",
+      appId: "HHmA3IDJgQWeaTOEDQUR1VGh-gzGzoHsz",
+      appKey: "L1uKN1UrQOQXtlppMCB7MntJ",
       notify: false,
       verify: false,
       avatar: "robohash",
@@ -341,7 +341,7 @@
     <script defer>
 const valineAPI = (() => {
   try {
-    AV.init("Hyq9wkH495DgNHWhDQCOfQSp-gzGzoHsz", "WaR7nrzhliHj9aVwdQzkdlGd");
+    AV.init("HHmA3IDJgQWeaTOEDQUR1VGh-gzGzoHsz", "L1uKN1UrQOQXtlppMCB7MntJ");
   } catch(error) {}
   const isExist = (identity) => {
     identity = identity || getRealPath();
@@ -483,7 +483,7 @@ if(true){
 
 <script>
 const timeToNowDOM = document.querySelector("#time-to-now");
-const startTimestamp = new Date(2018, 2, 19).getTime();
+const startTimestamp = new Date(2019, 2, 19).getTime();
 
 const updateTimeStr = () => {
   let offset = parseInt(
