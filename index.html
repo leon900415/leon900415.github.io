@@ -219,6 +219,26 @@
       
     </div>
     
+      <div id="hello-world" style="margin: 4rem 2px -1rem"></div>
+<script async>
+  (function(){
+    let playerTimer = setInterval(function(){
+      if(!window.APlayer){
+        return
+      }
+
+      new APlayer({
+        container: document.getElementById('hello-world'),
+        theme: '#e96900',
+        listFolded: false,
+        audio: [{"name":"平凡之路","artist":"朴树","url":"http://219.139.164.15/mp3.9ku.com/m4a/642431.m4a","cover":"https://i.loli.net/2019/03/19/5c909bc1e40bc.png"}]
+      });
+      
+      clearInterval(playerTimer)
+    }, 10);
+  })()
+</script>
+    
     <!-- 文章简介 -->
     <div class="article-content">
       <div class="markdown-body article-content--inner" v-html="mdToHtml(psg.summary)">
