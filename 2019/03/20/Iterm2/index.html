@@ -8,12 +8,12 @@
   
   
   
-  <title>Hello World | leon`s 狗窝</title>
+  <title>Mac下面iterm2自动连接远程服务器 | leon`s 狗窝</title>
 
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
   
-    <meta name="keywords" content="测试文本,Test1,">
+    <meta name="keywords" content="MAC,iterm2,">
   
 
   <script>
@@ -199,30 +199,30 @@
 
 <div class="post">
   <h1 class="article-title">
-    <span>Hello World</span>
+    <span>Mac下面iterm2自动连接远程服务器</span>
   </h1>
   <div class="article-top-meta">
     <span>
       发布 : 
-      2019-03-19
+      2019-03-20
     </span>
     
       <span>
         分类 : 
-          <a href="/categories/测试文本/">
-            测试文本
+          <a href="/categories/MAC/">
+            MAC
           </a>
       </span>
     
     
       <span>
-        浏览 : <span class="article-timer" data-identity="hello-world"></span>
+        浏览 : <span class="article-timer" data-identity="Iterm2"></span>
       </span>
     
   </div>
 
   
-    <div id="hello-world" style="margin: 4rem 2px"></div>
+    <div id="Iterm2" style="margin: 4rem 2px"></div>
 <script async>
   (function(){
     let playerTimer = setInterval(function(){
@@ -231,10 +231,10 @@
       }
 
       new APlayer({
-        container: document.getElementById('hello-world'),
+        container: document.getElementById('Iterm2'),
         theme: '#e96900',
         listFolded: false,
-        audio: [{"name":"平凡之路","artist":"朴树","url":"http://219.139.164.15/mp3.9ku.com/m4a/642431.m4a","cover":"https://i.loli.net/2019/03/19/5c909bc1e40bc.png"}]
+        audio: [{"name":"fading","artist":"Alle Farben/Ilira","url":"https://music.163.com/song?id=1320697603&userid=97503501","cover":"https://i.loli.net/2019/03/20/5c91a06d19d8c.png"}]
       });
       
       clearInterval(playerTimer)
@@ -245,15 +245,20 @@
 
   <div class="article-content">
     <div class="markdown-body">
-      <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="noopener">Deployment</a></p>
+      <p><strong>### 本地建一个文本文件</strong></p>
+<blockquote>
+<p>例如</p>
+</blockquote>
+<p><img src="https://i.loli.net/2019/03/20/5c91a22a786a7.png" alt="UTOOLS1553048103041.png"></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">set</span> user root</span><br><span class="line">  <span class="built_in">set</span> host 172.16.10.71</span><br><span class="line">  <span class="built_in">set</span> password mima123456</span><br><span class="line">  <span class="built_in">set</span> timeout -1</span><br><span class="line"></span><br><span class="line">  spawn ssh <span class="variable">$user</span>@<span class="variable">$host</span></span><br><span class="line">  expect <span class="string">"*assword:*"</span></span><br><span class="line">  send <span class="string">"<span class="variable">$password</span>\r"</span></span><br><span class="line">  interact</span><br><span class="line">  expect eof</span><br></pre></td></tr></table></figure>
+<p><strong>### 打开 Iterm2 的设置</strong></p>
+<p><img src="https://i.loli.net/2019/03/20/5c91a45af2d24.png" alt="UTOOLS1553048663061.png"></p>
+<p><strong>### 选你定义的</strong></p>
+<blockquote>
+<p>Iterm2 选 profiles 选你命名的就可以了</p>
+</blockquote>
+<p><img src="https://i.loli.net/2019/03/20/5c91a4fc9f6ab.png" alt="UTOOLS1553048825315.png"></p>
+<p><strong>### 打完收工</strong></p>
     </div>
   </div>
   
@@ -264,7 +269,7 @@
         
           本文作者 : 王冲 <br>
         
-        原文链接 : <a href>http://leon900415.github.io/2019/03/19/hello-world/</a><br>
+        原文链接 : <a href>http://leon900415.github.io/2019/03/20/Iterm2/</a><br>
         版权声明 : 本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> 许可协议。转载请注明出处！
         </blockquote>
       </div>
@@ -324,8 +329,8 @@
           <i class="iconfont icon-06tags"></i>标签: 
           
           <span class="span--tag">
-            <a href="/tags/Test1/">
-              #Test1
+            <a href="/tags/iterm2/">
+              #iterm2
             </a>
           </span>
           
@@ -347,12 +352,12 @@
 
   <nav class="post-navigation">
     
-    
-      <div class="nav-next">
-        下一篇:
-        <a href="/2019/03/20/Iterm2/" target="_self">Mac下面iterm2自动连接远程服务器</a>
-        <i class="iconfont icon-next"></i>
+      <div class="nav-pre">
+        <i class="iconfont icon-prev"></i>
+        上一篇:
+        <a href="/2019/03/19/hello-world/" target="_self">Hello World</a>
       </div>
+    
     
   </nav>
 
