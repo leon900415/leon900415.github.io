@@ -8,12 +8,12 @@
   
   
   
-  <title>Mac下面iterm2自动连接远程服务器 | leon`s 狗窝</title>
+  <title>nginx的多项目部署 | leon`s 狗窝</title>
 
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
   
-    <meta name="keywords" content="MAChexo,iterm2,">
+    <meta name="keywords" content="nginx部署,nginx,">
   
 
   <script>
@@ -199,63 +199,51 @@
 
 <div class="post">
   <h1 class="article-title">
-    <span>Mac下面iterm2自动连接远程服务器</span>
+    <span>nginx的多项目部署</span>
   </h1>
   <div class="article-top-meta">
     <span>
       发布 : 
-      2019-03-20
+      2019-03-22
     </span>
     
       <span>
         分类 : 
-          <a href="/categories/MAChexo/">
-            MAChexo
+          <a href="/categories/nginx部署/">
+            nginx部署
           </a>
       </span>
     
     
       <span>
-        浏览 : <span class="article-timer" data-identity="Iterm2"></span>
+        浏览 : <span class="article-timer" data-identity="nginx-depoly"></span>
       </span>
     
   </div>
 
   
-    <div id="Iterm2" style="margin: 4rem 2px"></div>
-<script async>
-  (function(){
-    let playerTimer = setInterval(function(){
-      if(!window.APlayer){
-        return
-      }
-
-      new APlayer({
-        container: document.getElementById('Iterm2'),
-        theme: '#e96900',
-        listFolded: false,
-        audio: [{"name":"fading","artist":"Alle Farben/Ilira","url":"http://www.170mv.com/kw/other.web.nf01.sycdn.kuwo.cn/resource/n2/80/22/3777994537.mp3","cover":"https://i.loli.net/2019/03/20/5c91a06d19d8c.png"}]
-      });
-      
-      clearInterval(playerTimer)
-    }, 10);
-  })()
-</script>
-  
 
   <div class="article-content">
     <div class="markdown-body">
-      <h3 id="本地建一个文本文件"><a href="#本地建一个文本文件" class="headerlink" title="本地建一个文本文件"></a>本地建一个文本文件</h3><blockquote>
-<p>例如</p>
+      <h3 id="Nginx-的多项目部署"><a href="#Nginx-的多项目部署" class="headerlink" title="Nginx 的多项目部署"></a><strong>Nginx 的多项目部署</strong></h3><h4 id="修改-vue-项目的配置文件"><a href="#修改-vue-项目的配置文件" class="headerlink" title="修改 vue 项目的配置文件"></a>修改 vue 项目的配置文件</h4><blockquote>
+<p>nginx 的配置需要改一下</p>
+<ul>
+<li>config 文件夹的 index.js<br><img src="https://i.loli.net/2019/03/22/5c9478b5ab8a2.png" alt="UTOOLS1553234093823.png"></li>
+<li>我这里把 getVdir()实现沉了一个方法 其实就是 ’/iot’<br><img src="https://i.loli.net/2019/03/22/5c9479bd74c04.png" alt="UTOOLS1553234358053.png"></li>
+</ul>
 </blockquote>
-<p><img src="https://i.loli.net/2019/03/20/5c91a22a786a7.png" alt="UTOOLS1553048103041.png"></p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">set</span> user root</span><br><span class="line">  <span class="built_in">set</span> host 172.16.10.71</span><br><span class="line">  <span class="built_in">set</span> password mima123456</span><br><span class="line">  <span class="built_in">set</span> timeout -1</span><br><span class="line"></span><br><span class="line">  spawn ssh <span class="variable">$user</span>@<span class="variable">$host</span></span><br><span class="line">  expect <span class="string">"*assword:*"</span></span><br><span class="line">  send <span class="string">"<span class="variable">$password</span>\r"</span></span><br><span class="line">  interact</span><br><span class="line">  expect eof</span><br></pre></td></tr></table></figure>
-<h3 id="打开-Iterm2-的设置"><a href="#打开-Iterm2-的设置" class="headerlink" title="打开 Iterm2 的设置"></a>打开 Iterm2 的设置</h3><p><img src="https://i.loli.net/2019/03/20/5c91a45af2d24.png" alt="UTOOLS1553048663061.png"></p>
-<h3 id="选你定义的"><a href="#选你定义的" class="headerlink" title="选你定义的"></a>选你定义的</h3><blockquote>
-<p>Iterm2 选 profiles 选你命名的就可以了</p>
+<h4 id="修改-nginx-的配置文件"><a href="#修改-nginx-的配置文件" class="headerlink" title="修改 nginx 的配置文件"></a>修改 nginx 的配置文件</h4><blockquote>
+<p>比如你的 nginx 是酱紫的 已经部署了一个 vue 项目了</p>
 </blockquote>
-<p><img src="https://i.loli.net/2019/03/20/5c91a4fc9f6ab.png" alt="UTOOLS1553048825315.png"></p>
-<h3 id="打完收工"><a href="#打完收工" class="headerlink" title="打完收工"></a>打完收工</h3>
+<p><img src="https://i.loli.net/2019/03/22/5c945c14d27fd.png" alt="UTOOLS1553226769324.png"></p>
+<blockquote>
+<p>想在这个 server 里面配置多个 vue 项目 辣么 可以酱紫</p>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">location /<span class="built_in">test</span>/ &#123;</span><br><span class="line">  <span class="built_in">alias</span> /路径/; <span class="comment"># 记得最后加个斜杆，root的话就不用 root /路径;  这个路径是 你的vue打包后那个dist存放在服务器的路径</span></span><br><span class="line">  try_files <span class="variable">$uri</span> <span class="variable">$uri</span>/ @router;</span><br><span class="line">  index index.html;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><img src="https://i.loli.net/2019/03/22/5c947a6ec740d.png" alt="UTOOLS1553234536042.png"></p>
+<blockquote>
+</blockquote>
+<h4 id="重读-nginx-的配置文件"><a href="#重读-nginx-的配置文件" class="headerlink" title="重读 nginx 的配置文件"></a>重读 nginx 的配置文件</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo systemctl reload nginx.service</span><br></pre></td></tr></table></figure>
     </div>
   </div>
   
@@ -266,7 +254,7 @@
         
           本文作者 : 王冲 <br>
         
-        原文链接 : <a href>http://leon900415.github.io/2019/03/20/Iterm2/</a><br>
+        原文链接 : <a href>http://leon900415.github.io/2019/03/22/nginx-depoly/</a><br>
         版权声明 : 本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> 许可协议。转载请注明出处！
         </blockquote>
       </div>
@@ -326,8 +314,8 @@
           <i class="iconfont icon-06tags"></i>标签: 
           
           <span class="span--tag">
-            <a href="/tags/iterm2/">
-              #iterm2
+            <a href="/tags/nginx/">
+              #nginx
             </a>
           </span>
           
@@ -352,15 +340,9 @@
       <div class="nav-pre">
         <i class="iconfont icon-prev"></i>
         上一篇:
-        <a href="/2019/03/19/hello-world/" target="_self">Hello World</a>
+        <a href="/2019/03/20/Iterm2/" target="_self">Mac下面iterm2自动连接远程服务器</a>
       </div>
     
-    
-      <div class="nav-next">
-        下一篇:
-        <a href="/2019/03/22/nginx-depoly/" target="_self">nginx的多项目部署</a>
-        <i class="iconfont icon-next"></i>
-      </div>
     
   </nav>
 
