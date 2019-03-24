@@ -1,0 +1,742 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+  
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  <meta name="author" content="董沅鑫, yuanxin.me@gmail.com">
+  
+  
+  
+  <title>hexo个人博客的搭建 | leon`s 狗窝</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  
+    <meta name="keywords" content="hexo-info,hexo,">
+  
+
+  <script>
+    console.log('\n%c Hexo-theme-bmw v4.0 ' + '%c 🎉 https://github.com/dongyuanxin/theme-bmw 🎉\n' + '\n%c View demo online ' + '%c 🔍 https://godbmw.com/ 🔍  \n' , 'color: #fadfa3; background: #030307; padding:3px 0;', '', 'color: #fadfa3; background: #030307; padding:3px 0;', '');
+  </script>
+
+  
+    <meta name="description" content="leon的个人Blog">
+  
+
+  
+
+  
+    <link rel="icon" href="/images/favicon.ico">
+    <link rel="apple-touch-icon" href="/images/touch-icon.png">
+  
+
+  <link href="https://cdn.bootcss.com/fancybox/3.5.2/jquery.fancybox.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="/css/base.css">
+<link rel="stylesheet" href="/icon/iconfont.css">
+<link rel="stylesheet" href="/css/github-markdown.css">
+<link rel="stylesheet" href="/css/highlight.css">
+
+  <script src="/js/util.js"></script>
+<script src="/js/valine.min.js"></script>
+
+  
+
+  
+    <link href="https://cdn.bootcss.com/aplayer/1.10.1/APlayer.min.css" rel="stylesheet">
+    <script src="https://cdn.bootcss.com/aplayer/1.10.1/APlayer.min.js" async></script>
+  
+
+  
+    <link href="https://cdn.bootcss.com/social-share.js/1.0.16/css/share.min.css" rel="stylesheet">
+  
+  
+  <script src="//cdn.bootcss.com/jquery/3.3.1/jquery.min.js" async></script>
+  
+  
+    <script src="//cdn.jsdelivr.net/npm/leancloud-storage@3.11.0/dist/av-min.js"></script>
+  
+
+</head>
+
+  <body>
+
+    
+
+    <div id="app">
+
+      <div class="header-wrap">
+  <header>
+    <div class="site-brand">
+      <div class="site-title">
+        <a href="/">leon</a>
+      </div>
+    </div>
+    <nav class="site-navigation">
+      <ul class="nav-menu">
+      
+        <li class="nav-item" data-path="/">
+          
+            <a href="/" target="_self">
+              主页
+            </a>
+          
+        </li>
+      
+        <li class="nav-item" data-path="/archives/">
+          
+            <a href="/archives/" target="_self">
+              归档
+            </a>
+          
+        </li>
+      
+        <li class="nav-item" data-path="/categories/">
+          
+            <a href="/categories/" target="_self">
+              分类
+            </a>
+          
+        </li>
+      
+        <li class="nav-item" data-path="/tags/">
+          
+            <a href="/tags/" target="_self">
+              标签
+            </a>
+          
+        </li>
+      
+        <li class="nav-item" data-path="/friends/">
+          
+            <a href="/friends/" target="_self">
+              友链
+            </a>
+          
+        </li>
+      
+        <li class="nav-item" data-path="/about/">
+          
+            <a href="/about/" target="_self">
+              关于
+            </a>
+          
+        </li>
+      
+        <li class="nav-item" data-path>
+          
+            <a href="javascript:void(0);" v-else>抓到我</a>
+            <ul class="nav-menu--dropdown">
+              
+                <li>
+                  <a href="https://github.com/leon900415" target="_blank">
+                    Github
+                  </a>
+                </li>
+              
+                <li>
+                  <a href="https://www.zhihu.com/people/leonzhu-93/activities" target="_blank">
+                    知乎
+                  </a>
+                </li>
+              
+            </ul>
+          
+        </li>
+      
+      </ul>
+    </nav>
+    <i class="iconfont icon-menu"></i>
+  </header>
+</div>
+
+<script>
+  let links = document.querySelectorAll('.nav-item');
+  for(let link of links){
+    let childrenLink = link.querySelector('ul');
+    link.addEventListener('mouseenter', () => {
+      if(childrenLink) {
+        childrenLink.className = "nav-menu--dropdown active";
+      }
+    })
+    link.addEventListener('mouseleave', () => {
+      if(childrenLink) {
+        childrenLink.className = "nav-menu--dropdown";
+      }
+    })
+  }
+  let rootRealPath = getRealPath(window.location.pathname, true);
+  for(let link of links) {
+    let linkPath = link.getAttribute("data-path");
+    if(linkPath && getRealPath(linkPath, true) === rootRealPath) {
+      link.className = "nav-item hover";
+    }
+  }
+
+  let iconMenu = document.querySelector("i.iconfont.icon-menu"),
+    iconMenuClicked = false;
+  let navDOM = document.querySelector("nav.site-navigation");
+  iconMenu.addEventListener("click", () => {
+    iconMenuClicked 
+      ? navDOM.className = "site-navigation active"
+      : navDOM.className = "site-navigation";
+    iconMenuClicked = !iconMenuClicked;
+  })
+</script>
+
+      
+
+
+
+
+
+
+
+
+<div class="container post-index">
+
+  
+
+<div class="post">
+  <h1 class="article-title">
+    <span>hexo个人博客的搭建</span>
+  </h1>
+  <div class="article-top-meta">
+    <span>
+      发布 : 
+      2019-03-24
+    </span>
+    
+      <span>
+        分类 : 
+          <a href="/categories/hexo-info/">
+            hexo-info
+          </a>
+      </span>
+    
+    
+      <span>
+        浏览 : <span class="article-timer" data-identity="hexo-info"></span>
+      </span>
+    
+  </div>
+
+  
+
+  <div class="article-content">
+    <div class="markdown-body">
+      <h3 id="Hexo-的搭建以及部署"><a href="#Hexo-的搭建以及部署" class="headerlink" title="Hexo 的搭建以及部署"></a><strong>Hexo 的搭建以及部署</strong></h3><h4 id="Hexo-的安装"><a href="#Hexo-的安装" class="headerlink" title="Hexo 的安装"></a>Hexo 的安装</h4><blockquote>
+<p>这里默认你的 pc 是有 node.js 的环境的<br>没有 node.js 的环境的 可以先去了解下 node.js 的环境安装</p>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ npm install -g hexo-cli</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>这条命令就可以安装好 hexo 了</p>
+</blockquote>
+<h5 id="Hexo-建站"><a href="#Hexo-建站" class="headerlink" title="Hexo 建站"></a>Hexo 建站</h5><blockquote>
+<p>可以开始你的 blog 了</p>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ hexo init &lt;folder&gt;</span><br><span class="line">$ <span class="built_in">cd</span> &lt;folder&gt;</span><br><span class="line">$ npm install</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>目录结构如下</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">.</span><br><span class="line">├── _config.yml</span><br><span class="line">├── package.json</span><br><span class="line">├── scaffolds</span><br><span class="line">├── source</span><br><span class="line">|   ├── _drafts</span><br><span class="line">|   └── _posts</span><br><span class="line">└── themes</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>source 文件夹 的 _posts 就是你每一篇博客的文件夹了<br>thems 就是你的主题文件夹 这里主要介绍 直接使用别人写好的主题 毕竟… css 跟样式太短板 😂</p>
+</blockquote>
+<h4 id="下载主题"><a href="#下载主题" class="headerlink" title="下载主题"></a>下载主题</h4><blockquote>
+<p>这里我使用的是 ***GODBMW 大佬的 <a href="https://github.com/dongyuanxin/theme-bmw" target="_blank" rel="noopener">theme-bmw</a></p>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ hexo init your-blog</span><br><span class="line">$ <span class="built_in">cd</span> your-blog/</span><br><span class="line">$ git <span class="built_in">clone</span> git@github.com:dongyuanxin/theme-bmw.git themes/bmw</span><br></pre></td></tr></table></figure>
+<h5 id="修改-HEXO-配置文件"><a href="#修改-HEXO-配置文件" class="headerlink" title="修改 HEXO 配置文件"></a>修改 HEXO 配置文件</h5><blockquote>
+<p>修改 hexo 的配置文件：your-blog(你的 blog 的文件夹)/_config.yml:</p>
+</blockquote>
+<p>(<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"># ...</span><br><span class="line"></span><br><span class="line"># 位置：大概位于 6 ～ 12 行</span><br><span class="line"></span><br><span class="line">title: 您自己的网站标题</span><br><span class="line">subtitle: # 不需要填写</span><br><span class="line">description: 您自己的网站描述</span><br><span class="line">keywords: 您自己的网站关键词</span><br><span class="line">author: 您的姓名</span><br><span class="line">language: zh-Hans # 目前仅支持中文</span><br><span class="line">timezone: # 不需要填写</span><br><span class="line"></span><br><span class="line"># 位置：大概位于 18 行</span><br><span class="line"></span><br><span class="line">permalink: passages/:title/ # 如果您需要开启评论和文章统计，请修改此配置</span><br><span class="line"></span><br><span class="line"># 位置：大概位于 76 行</span><br><span class="line"></span><br><span class="line">theme: bmw # 启用 &quot;bmw&quot; 主题</span><br><span class="line"></span><br><span class="line"># ...</span><br><span class="line"></span><br><span class="line">(```)</span><br><span class="line"></span><br><span class="line">&gt; 其实 这时候 就可以启动博客 看看效果了 默认是有一篇 Hello-World 的博客</span><br><span class="line"></span><br><span class="line">#### 启动博客</span><br><span class="line"></span><br><span class="line">```bash</span><br><span class="line">  $ hexo s</span><br></pre></td></tr></table></figure></p>
+<blockquote>
+<p>hexo 默认监听 4000 端口, 此时, 请使用 Chrome 等主流浏览器打开 <a href="http://localhost:4000/" target="_blank" rel="noopener">http://localhost:4000/</a> ，查看博客。</p>
+</blockquote>
+<h5 id="文章格式"><a href="#文章格式" class="headerlink" title="文章格式"></a>文章格式</h5><p>(<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">---</span><br><span class="line"></span><br><span class="line">title: 文章标题</span><br><span class="line">date: 文章创建日期</span><br><span class="line">categories: 文章分类</span><br><span class="line">tags:</span><br><span class="line"></span><br><span class="line">- 文章标签 1</span><br><span class="line">- 文章标签 2</span><br><span class="line">- ...</span><br><span class="line"></span><br><span class="line">---</span><br><span class="line"></span><br><span class="line">在`&lt;!-- more --&gt;`之前编写文章的摘要内容！！！</span><br><span class="line"></span><br><span class="line">&lt;!-- more --&gt;</span><br><span class="line"></span><br><span class="line">在`&lt;!-- more --&gt;`之后编写文章的正式内容！！！</span><br><span class="line"></span><br><span class="line">(```)</span><br><span class="line"></span><br><span class="line">&gt; 注：请为您的文章撰写摘要，否则首页看起来会很空洞</span><br><span class="line"></span><br><span class="line">##### 涉及到 your-blog/themes/bmw/\_config.yml 配置文件的修改</span><br><span class="line"></span><br><span class="line">&gt; 跟详细的教程 移步[GODBMW 的个人博客-Theme-BMW 中文文档](https://godbmw.com/passages/2018-11-15-theme-bmw-docs-zh/)</span><br><span class="line"></span><br><span class="line">###### 目录渲染 | 数学公式渲染</span><br><span class="line"></span><br><span class="line">(```)</span><br><span class="line">toc: true</span><br><span class="line"></span><br><span class="line">mathjax: true</span><br><span class="line"></span><br><span class="line">(```)</span><br><span class="line"></span><br><span class="line">###### 插入音乐</span><br><span class="line"></span><br><span class="line">&gt; 比如</span><br><span class="line"></span><br><span class="line">(```)</span><br><span class="line"></span><br><span class="line">playlist: -</span><br><span class="line">name: Where are you</span><br><span class="line">artist: AniFace</span><br><span class="line">url: &quot;//music.163.com/song/media/outer/url?id=453843751.mp3&quot;</span><br><span class="line">cover: &quot;//p1.music.126.net/AUfXMljLBgB3PBV731IzRg==/109951162857118370.jpg?param=130y130&quot; -</span><br><span class="line">name: END THEME</span><br><span class="line">artist: 天門</span><br><span class="line">url: &quot;http://music.163.com/song/media/outer/url?id=528306.mp3&quot;</span><br><span class="line">cover: &quot;//p1.music.126.net/1sw_ptPeI_GNm58VBW1udQ==/2504687488135369.jpg?param=130y130&quot;</span><br><span class="line">(```)</span><br><span class="line"></span><br><span class="line">&gt; 此功能不需要修改配置文件 只需要在你的博客里面的开头添加就可以了</span><br><span class="line"></span><br><span class="line">###### 版权保护</span><br><span class="line"></span><br><span class="line">(```)</span><br><span class="line">copyright:</span><br><span class="line">enable: true # 是否开启版权保护</span><br><span class="line">author: GODBMW # 您的名字</span><br><span class="line">license: &apos;本博客所有文章除特别声明外，均采用 &lt;a href=&quot;https://creativecommons.org/licenses/by-nc-sa/4.0/&quot;&gt;CC BY-NC-SA 4.0&lt;/a&gt; 许可协议。转载请注明出处！&apos;</span><br><span class="line"></span><br><span class="line">(```)</span><br><span class="line"></span><br><span class="line">###### 多平台分享</span><br><span class="line"></span><br><span class="line">(```)</span><br><span class="line">social_share:</span><br><span class="line">enable: true # 是否开启平台分享</span><br><span class="line">sites: qzone, qq, weibo, wechat, douban, google, facebook, twitter</span><br><span class="line">disabled:</span><br><span class="line"></span><br><span class="line">(```)</span><br><span class="line"></span><br><span class="line">###### 用户打赏</span><br><span class="line"></span><br><span class="line">(```)</span><br><span class="line"></span><br><span class="line"># 是否开启 打赏功能</span><br><span class="line"></span><br><span class="line">reward:</span><br><span class="line">enable: true</span><br><span class="line">meta: 知识 &amp; 情怀 | 二者兼得 # 提示文字</span><br><span class="line">button_meta: 投食 # 按钮文字</span><br><span class="line">qrcodes: # 支持多个支付方式 # src: 二维码位置 # meta: 二维码提示信息 -</span><br><span class="line">src: /images/wechat.png</span><br><span class="line">meta: &quot;微信扫一扫, 向我投食&quot; -</span><br><span class="line">src: /images/alipay.png</span><br><span class="line">meta: &quot;支付宝扫一扫, 向我投食&quot;</span><br><span class="line"></span><br><span class="line">(```)</span><br><span class="line"></span><br><span class="line">###### 更多页面</span><br><span class="line"></span><br><span class="line">&gt; BMW 主题在 HEXO 默认界面的基础上，额外提供了标签归档、 分类归档、 关于介绍 和 友链界面。</span><br><span class="line"></span><br><span class="line">1. 标签页面</span><br><span class="line"></span><br><span class="line">   &gt; 生成标签页面：</span><br><span class="line"></span><br><span class="line">```bash</span><br><span class="line">$ hexo new page tags</span><br></pre></td></tr></table></figure></p>
+<blockquote>
+<p>修改标签归档页面的 markdown 文件(文件路径：your-blog/source/tags/index.md)的内容：</p>
+</blockquote>
+<p>(<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">---</span><br><span class="line"></span><br><span class="line">title: tags</span><br><span class="line">date: &lt;!-- 自动生成，无需修改 --&gt;</span><br><span class="line">type: &quot;tags&quot;</span><br><span class="line">categories:</span><br><span class="line">tags:</span><br><span class="line"></span><br><span class="line">---</span><br><span class="line"></span><br><span class="line">(```)</span><br><span class="line"></span><br><span class="line">&gt; 注：type 字段的值是 tags</span><br><span class="line"></span><br><span class="line">2. 分类页面</span><br><span class="line">   &gt; 生成分类页面</span><br><span class="line"></span><br><span class="line">```bash</span><br><span class="line">$ hexo new page categories</span><br></pre></td></tr></table></figure></p>
+<blockquote>
+<p>修改分类归档页面的 markdown 文件(文件路径：your-blog/source/categories/index.md)的内容：</p>
+</blockquote>
+<p>(<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">---</span><br><span class="line"></span><br><span class="line">title: categories</span><br><span class="line">date: &lt;!-- 自动生成，无需修改 --&gt;</span><br><span class="line">type: &quot;categories&quot;</span><br><span class="line">categories:</span><br><span class="line">tags:</span><br><span class="line"></span><br><span class="line">---</span><br><span class="line"></span><br><span class="line">(```)</span><br><span class="line"></span><br><span class="line">&gt; 注：type 字段的值是 categories</span><br><span class="line"></span><br><span class="line">3. 关于页面</span><br><span class="line"></span><br><span class="line">   &gt; 生成分类页面：</span><br><span class="line"></span><br><span class="line">   ```bash</span><br><span class="line">   $ hexo new page about</span><br></pre></td></tr></table></figure></p>
+<blockquote>
+<p>修改关于页面的 markdown 文件(文件路径：your-blog/source/about/index.md)的内容：</p>
+</blockquote>
+<p>(<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">---</span><br><span class="line"></span><br><span class="line">title: about</span><br><span class="line">date: &lt;!-- 自动生成，无需修改 --&gt;</span><br><span class="line">type: &quot;about&quot;</span><br><span class="line">categories:</span><br><span class="line">tags:</span><br><span class="line"></span><br><span class="line">---</span><br><span class="line"></span><br><span class="line">这里编写您的网站/博客的相关介绍：联系方式、更新日志、甚至是您的个人简历。</span><br><span class="line"></span><br><span class="line">(```)</span><br><span class="line"></span><br><span class="line">4. 友链界面</span><br><span class="line"></span><br><span class="line">   &gt; 友链界面除了要编写相关 markdown 文件，还需要更改 BMW 主题的配置文件，以更好地方式展示您的友链！</span><br><span class="line">   &gt; 生成友链界面</span><br><span class="line"></span><br><span class="line">   ```bash</span><br><span class="line">   $ hexo new page friends</span><br></pre></td></tr></table></figure></p>
+<blockquote>
+<p>修改友链页面的 markdown 文件(文件路径：your-blog/source/friends/index.md)的内容：</p>
+</blockquote>
+<p>(<code>`</code>)</p>
+<hr>
+<p>title: friends<br>date: <!-- 自动生成，无需修改 --><br>type: “friends”<br>categories:<br>tags:</p>
+<hr>
+<p>这里编写您的友链声明，您可以陈述您的友链申请规则。</p>
+<p>(<code>`</code>)</p>
+<blockquote>
+<p>注：type 字段的值是 friends</p>
+</blockquote>
+<ol start="5">
+<li>展示更多友链</li>
+</ol>
+<blockquote>
+<p>请打开 BMW 主题 的配置文件：your-blog/themes/bmw/_config.yml</p>
+</blockquote>
+<p>(<code>`</code>)</p>
+<h1 id="…"><a href="#…" class="headerlink" title="…"></a>…</h1><h1 id="友链详细信息"><a href="#友链详细信息" class="headerlink" title="友链详细信息"></a>友链详细信息</h1><p>friends: # 这是一个数组, 每个元素是一个 obj 对象 -<br>nickname: 友链名称<br>avatar: 友链头像<br>site: 友链地址<br>meta: 友链信息 -<br>nickname: 友链名称 2<br>avatar: 友链头像 2<br>site: 友链地址 2<br>meta: 友链信息 2</p>
+<h1 id="…-1"><a href="#…-1" class="headerlink" title="…"></a>…</h1><p>(<code>`</code>)</p>
+<h6 id="评论系统-amp-amp-文章统计"><a href="#评论系统-amp-amp-文章统计" class="headerlink" title="评论系统 &amp;&amp; 文章统计"></a>评论系统 &amp;&amp; 文章统计</h6><blockquote>
+<p>theme-bmw 的评论系统采用的是 Valine，并且提供了基于 Leancloud 的文章统计插件。您只需要按照以下步骤进行简单的配置，便可以提供更好的用户体验！<br>这里省略 leancloud 的申请过程 详细可以看 GODBMW 的教程 <a href="https://godbmw.com/passages/2018-11-15-theme-bmw-docs-zh/" target="_blank" rel="noopener">https://godbmw.com/passages/2018-11-15-theme-bmw-docs-zh/</a></p>
+</blockquote>
+<h6 id="开启评论系统"><a href="#开启评论系统" class="headerlink" title="开启评论系统"></a>开启评论系统</h6><blockquote>
+<p>请先确保您按照前面步骤配置了 leancloud，并且正确修改了配置文件中的相关配置。<br>进入配置文件，在大概 77 行左右，请将 leancloud.comment 修改为 true.<br>重启 hexo 服务即可生效。</p>
+</blockquote>
+<h6 id="开启文章统计"><a href="#开启文章统计" class="headerlink" title="开启文章统计"></a>开启文章统计</h6><blockquote>
+<p>请先确保您按照前面步骤配置了 leancloud，并且正确修改了配置文件中的相关配置。<br>进入配置文件，在大概 78 行左右，请将 leancloud.timer 修改为 true.<br>重启 hexo 服务即可生效。</p>
+</blockquote>
+<h5 id="进阶"><a href="#进阶" class="headerlink" title="进阶"></a>进阶</h5><h6 id="自定义导航栏"><a href="#自定义导航栏" class="headerlink" title="自定义导航栏"></a>自定义导航栏</h6><p>(<code>`</code>)</p>
+<h1 id="推荐：填写您的网站名称"><a href="#推荐：填写您的网站名称" class="headerlink" title="推荐：填写您的网站名称"></a>推荐：填写您的网站名称</h1><p>nav_name: GODBMW.com</p>
+<p>nav:</p>
+<h1 id><a href="#" class="headerlink" title="-"></a>-</h1><h1 id="name-名称"><a href="#name-名称" class="headerlink" title="name: 名称"></a>name: 名称</h1><h1 id="path-网址"><a href="#path-网址" class="headerlink" title="path: 网址"></a>path: 网址</h1><h1 id="blank-是否在新页面打开，默认是-false"><a href="#blank-是否在新页面打开，默认是-false" class="headerlink" title="blank: 是否在新页面打开，默认是 false"></a>blank: 是否在新页面打开，默认是 false</h1><h1 id="children-子导航-数组-，默认为空"><a href="#children-子导航-数组-，默认为空" class="headerlink" title="children: 子导航(数组)，默认为空"></a>children: 子导航(数组)，默认为空</h1><h1 id="…-2"><a href="#…-2" class="headerlink" title="…"></a>…</h1><ul>
+<li>name: 关于<br>path: /about/</li>
+<li>name: 抓到我<br>children: -<br>name: Github<br>path: “<a href="https://github.com/dongyuanxin&quot;" target="_blank" rel="noopener">https://github.com/dongyuanxin&quot;</a><br>blank: true -<br>name: “知乎”<br>path: “<a href="https://www.zhihu.com/people/godbmw/activities&quot;" target="_blank" rel="noopener">https://www.zhihu.com/people/godbmw/activities&quot;</a><br>blank: true</li>
+</ul>
+<p>(<code>`</code>)</p>
+<h6 id="自定义页脚"><a href="#自定义页脚" class="headerlink" title="自定义页脚"></a>自定义页脚</h6><p>(<code>`</code>)</p>
+<p>footer:<br>start: ‘2018-01-01’ # 网站创建时间，格式: YYYY-MM-DD<br>more: ‘<a href="https://www.google.com/analytics/" target="_blank">Google Analytics</a>提供统计服务’</p>
+<p>作者: 董沅鑫<br>链接: <a href="https://godbmw.com/passages/2018-11-15-theme-bmw-docs-zh/" target="_blank" rel="noopener">https://godbmw.com/passages/2018-11-15-theme-bmw-docs-zh/</a><br>来源: godbmw.com<br>著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。</p>
+<p>(<code>`</code>)</p>
+<h6 id="自定义样式和脚本文件"><a href="#自定义样式和脚本文件" class="headerlink" title="自定义样式和脚本文件"></a>自定义样式和脚本文件</h6><p><code>custom_style: # 样式文件的路径</code><br><code>custom_script: # 数组 - src: # 脚本文件的路径 load: # script加载和执行方式：默认 | async | defer</code></p>
+    </div>
+  </div>
+  
+    <div class="copy-right">
+      <div class="markdown-body">
+        <blockquote>
+        
+        
+          本文作者 : 王冲 <br>
+        
+        原文链接 : <a href>http://leon900415.github.io/2019/03/24/hexo-info/</a><br>
+        版权声明 : 本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> 许可协议。转载请注明出处！
+        </blockquote>
+      </div>
+    </div>
+  
+  
+  
+    <div class="social-share" style="margin-top: -2rem" data-wechat-qrcode-title="<p>微信扫一扫</p>" data-wechat-qrcode-helper="<p>微信右上角, 扫一扫分享</p>" data-sites="qzone, qq, weibo, wechat, douban, google, facebook, twitter">
+  <span style="color: #6b7487; font-size: 1.4rem;">分享到: </span>
+</div>
+<script src="https://cdn.bootcss.com/social-share.js/1.0.16/js/social-share.min.js" async></script>
+  
+
+  
+    <div id="reward">
+  
+    <p id="reward-meta">知识 & 情怀 | 二者兼得</p>
+  
+  <button id="reward-btn">
+    
+    <span>投食</span>
+  </button>
+  <div id="reward-qrcode">
+    
+      <div class="reward-qrcode--container">
+        <img class="qrcode-img" src="/images/wechat.png" alt="微信扫一扫, 向我投食">
+        <p class="qrcode-meta">微信扫一扫, 向我投食</p>
+      </div>
+    
+      <div class="reward-qrcode--container">
+        <img class="qrcode-img" src="/images/alipay.png" alt="支付宝扫一扫, 向我投食">
+        <p class="qrcode-meta">支付宝扫一扫, 向我投食</p>
+      </div>
+    
+  </div>
+
+</div>
+
+<script>
+  (() => {
+    let button = document.querySelector('#reward-btn'),
+      qrcode = document.querySelector('#reward-qrcode'),
+      display = false;
+    
+    button.addEventListener('click', () => {
+      qrcode.style.display = display ? 'none' : 'block'
+      display = !display
+    }, false)
+  })()
+</script>
+  
+
+  <div class="article-footer">
+    <div class="article-meta pull-left">
+      <span>
+        
+          <i class="iconfont icon-06tags"></i>标签: 
+          
+          <span class="span--tag">
+            <a href="/tags/hexo/">
+              #hexo
+            </a>
+          </span>
+          
+        
+      </span>
+    </div>
+    <div class="article-meta pull-right">
+    </div>
+  </div>
+</div>
+
+
+  <aside id="sidebar">
+    <p id="sidebar-header"></p>
+    <ol id="sidebar-toc"></ol>
+  </aside>
+  <script async>setTimeout(generateToc, 10);</script>
+
+
+  <nav class="post-navigation">
+    
+      <div class="nav-pre">
+        <i class="iconfont icon-prev"></i>
+        上一篇:
+        <a href="/2019/03/22/nginx-depoly/" target="_self">nginx的多项目部署</a>
+      </div>
+    
+    
+  </nav>
+
+  
+    <a href="#comment" class="comment-anchor"></a>
+<div class="comment-title"><i class="iconfont icon-footprint"></i> 留下足迹 <i class="iconfont icon-footprint"></i></div>
+<div id="vcomments"></div>
+
+<script defer>
+  if( true ) {
+    let path = getRealPath()
+    new Valine({
+      el: "#vcomments",
+      appId: "HHmA3IDJgQWeaTOEDQUR1VGh-gzGzoHsz",
+      appKey: "L1uKN1UrQOQXtlppMCB7MntJ",
+      notify: false,
+      verify: false,
+      avatar: "robohash",
+      placeholder: "正确填写邮箱, 才能及时收到回复哦♪(^∇^*)",
+      path
+    });
+  }
+</script>
+   
+
+  
+    <script defer>
+const valineAPI = (() => {
+  try {
+    AV.init("HHmA3IDJgQWeaTOEDQUR1VGh-gzGzoHsz", "L1uKN1UrQOQXtlppMCB7MntJ");
+  } catch(error) {}
+  const isExist = (identity) => {
+    identity = identity || getRealPath();
+    let query = new AV.Query('Timer');
+    return new Promise((resolve, reject) => {
+      query.equalTo("identity", identity);
+      query.find().then(results => {
+        resolve(results.length > 0);
+      }, error => reject(error));
+    })
+  }
+
+  const _get = (identity) => {
+    let query = null;
+    if(identity && identity instanceof Array){
+      let querys = [];
+      for(let i = 0; i < identity.length; ++i) {
+        querys[i] = new AV.Query('Timer');
+        querys[i].equalTo('identity', identity[i]);
+      }
+      query = AV.Query.or.apply(null ,querys);
+    } else {
+      identity = identity || getRealPath();
+      query = new AV.Query("Timer");
+      query.equalTo("identity", identity);
+    }
+
+    return new Promise((resolve, reject) => {
+      query.find()
+      .then(results => resolve(results))
+      .catch(error => reject(error))
+    })
+  }
+
+  const create = (identity) => {
+    identity = identity || getRealPath();
+    return new Promise((resolve, reject) => {
+      let Todo = AV.Object.extend('Timer');
+      let todo = new Todo();
+      todo.set("times", 1);
+      todo.set("identity", identity);
+      todo.save().then(res => resolve(true), error => reject(error));
+    })
+  }
+
+  const update = (identity) => {
+    identity = identity || getRealPath();
+    return new Promise((resolve, reject) => {
+      let query = new AV.Query('Timer');
+      query.equalTo("identity", identity);
+      query.find().then(todos => {
+        todos.forEach(todo => {
+          todo.set("times", todo.attributes.times + 1);
+        });
+        return AV.Object.saveAll(todos);
+      }).then(todos => resolve(true), error => reject(error));
+    })
+  }
+
+  return {
+    isExist,
+    _get,
+    update,
+    create
+  }
+})()
+
+const calcAndWriteTimes = () => {
+  let isPost = true;
+
+  let timerAllDOM = document.querySelectorAll(".article-timer");
+
+  if(isPost) {
+    let identity = timerAllDOM[0].getAttribute("data-identity");
+    valineAPI.isExist(identity)
+    .then(exist => {
+      if(exist) {
+        return valineAPI.update(identity);
+      }
+      return new Promise(resolve => resolve(true));
+    })
+    .then( succuess => valineAPI._get(identity))
+    .then( result => timerAllDOM[0].innerText = result[0].attributes.times)
+    .catch(error => console.log(error.message))
+    return ;
+  }
+
+  let timerDOMCache = {};
+
+  for(let timerDOM of timerAllDOM) {
+    let identity = timerDOM.getAttribute("data-identity");
+    if(timerDOMCache.hasOwnProperty(identity)){
+      timerDOMCache[identity].dom.push(timerDOM);
+    }else{
+      timerDOMCache[identity] = {
+        dom: [timerDOM],
+        times: undefined
+      };
+    }
+  }
+
+  let identities = Object.keys(timerDOMCache);
+  valineAPI._get(identities).then(results => {
+    for(let result of results) {
+      let {identity, times} = result.attributes;
+      timerDOMCache[identity].times = times;
+      timerDOMCache[identity].dom.map(item => item.innerText = times);
+    }
+    for(let identity of identities) {
+      if(timerDOMCache[identity].times){
+        continue;
+      }
+      timerDOMCache[identity].dom.map(item => item.innerText = 1);
+      valineAPI.create(identity);
+    }
+  }).catch(error => console.log(error.message))
+}
+
+if(true){
+  calcAndWriteTimes();
+}
+</script>
+   
+
+</div>
+
+
+      <footer>
+  <p class="site-info">
+    博客已萌萌哒运行<span id="time-to-now"></span><span class="my-face">(●'◡'●)ﾉ♥</span>
+    <br>
+    Theme - <a href="https://github.com/dongyuanxin/theme-bmw">BMW</a> | Made With 💗 | Powered by <a href="https://godbmw.com/">GodBMW</a>
+    <br>
+    
+  </p>
+</footer>
+
+
+
+<script>
+const timeToNowDOM = document.querySelector("#time-to-now");
+const startTimestamp = new Date(2019, 2, 19).getTime();
+
+const updateTimeStr = () => {
+  let offset = parseInt(
+      (new Date().getTime() - startTimestamp) / 1000,
+      10
+    ),
+    day = Math.floor(offset / 86400),
+    hour = Math.floor((offset % 86400) / 3600),
+    minute = Math.floor(((offset % 86400) % 3600) / 60),
+    second = Math.floor(((offset % 86400) % 3600) % 60);
+  timeToNowDOM.innerHTML =
+    day + "天" + hour + "小时" + minute + "分钟" + second + "秒";
+  setTimeout(updateTimeStr, 500);
+}
+
+setTimeout(updateTimeStr, 500);
+</script>
+
+
+      <div class="back-to-top hidden">
+  <span>
+    <i class="iconfont icon-60"></i><span></span>%
+  </span>
+</div>
+
+<script>
+const updateIconToTop = percent => {
+  let dom = document.querySelector(".back-to-top span span");
+  dom.innerText = percent;
+  if(percent < 1) {
+    document.querySelector(".back-to-top").className = "back-to-top hidden";
+  } else {
+    document.querySelector(".back-to-top").className = "back-to-top";
+  }
+}
+
+const handleScoll = () => {
+  let isRunning = false;
+  return () => {
+    if (isRunning) return;
+    isRunning = true;
+    window.requestAnimationFrame(timestamp => {
+      let scrollTop =
+          document.documentElement.scrollTop || document.body.scrollTop,
+        scrollHeight =
+          document.documentElement.scrollHeight ||
+          document.body.scrollHeight,
+        clientHeight =
+          document.documentElement.clientHeight ||
+          document.body.clientHeight;
+      isRunning = false;
+      if (scrollTop <= 1) {
+        updateIconToTop(0);
+        return;
+      }
+      if (scrollTop + clientHeight >= scrollHeight) {
+        updateIconToTop(100);
+      } else {
+        updateIconToTop(parseInt(
+          100 * scrollTop / (scrollHeight - clientHeight),
+          10
+        ));
+      }
+    });
+  };
+}
+
+const backToTop = () => {
+  let scrollTop =
+      document.documentElement.scrollTop || document.body.scrollTop,
+    delay = 10,
+    time = 200;
+  if (scrollTop <= 20) {
+    document.documentElement.scrollTop = 0;
+    document.body.scrollTop = 0;
+    return;
+  }
+  let step = Math.ceil(scrollTop * delay / time);
+  let timer = setInterval(() => {
+    scrollTop =
+      document.documentElement.scrollTop || document.body.scrollTop;
+    if (scrollTop - step <= 0) {
+      document.documentElement.scrollTop = 0;
+      document.body.scrollTop = 0;
+      clearInterval(timer);
+    } else {
+      document.documentElement.scrollTop = scrollTop - step;
+      document.body.scrollTop = scrollTop - step;
+    }
+  }, delay);
+}
+
+document.addEventListener("scroll", handleScoll(), false);
+
+document.querySelector(".back-to-top").addEventListener("click", backToTop, false);
+
+</script>
+
+    </div>
+
+    
+      <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML" async></script>
+<script>
+  (() => {
+    const mathjaxConfig = {
+      showProcessingMessages: false, //关闭js加载过程信息
+      messageStyle: "none", //不显示信息
+      jax: ["input/TeX", "output/HTML-CSS"],
+      tex2jax: {
+        inlineMath: [["$", "$"], ["\\(", "\\)"]], //行内公式选择符
+        displayMath: [["$$", "$$"], ["\\[", "\\]"]], //段内公式选择符
+        skipTags: ["script", "noscript", "style", "textarea", "pre", "code", "a"] //避开某些标签
+      },
+      "HTML-CSS": {
+        availableFonts: ["STIX", "TeX"], //可选字体
+        showMathMenu: false //关闭右击菜单显示
+      }
+    }
+
+    let mathjaxInterval = setInterval(() => {
+      if(!window.MathJax){
+        return;
+      }
+      window.MathJax.Hub.Config(mathjaxConfig)
+      window.MathJax.Hub.Queue(["Typeset", MathJax.Hub, document.getElementById('app')])
+
+      clearInterval(mathjaxInterval)
+    }, 10)    
+  })()
+</script>
+    
+
+    <script src="https://cdn.bootcss.com/fancybox/3.5.2/jquery.fancybox.min.js" async></script>
+<script async>
+  let fancyTimer = setInterval(function(){
+    if(!window.$){
+      return;
+    }
+    $(document).ready(function() {
+      $(".post img").each(function () {
+        if($(this).parent().get(0).tagName.toLowerCase() === "a") {
+          return;
+        }
+        // $(this).attr("data-fancybox", "gallery"); // if you add 'data-fancybox', img will display after showed
+        var element = document.createElement("a");
+        $(element).attr("data-fancybox", "gallery");
+        $(element).attr("href", $(this).attr("src"));
+        $(this).wrap(element);
+      });
+      
+      clearInterval(fancyTimer);
+    });
+  }, 10);
+</script>
+
+    
+  </body>
+
+</html>
